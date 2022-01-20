@@ -10,7 +10,7 @@ namespace LeaveManagement.Web.Data
         {
         }
 
-        public DbSet<LeaveTypes> LeaveTypes { get; set; }
+        public DbSet<LeaveType> LeaveType { get; set; }
         public DbSet<LeaveAllocation> LeaveAllocationS { get; set; }
 
 

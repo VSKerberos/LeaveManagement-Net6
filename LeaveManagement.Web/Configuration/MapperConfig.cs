@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using LeaveManagement.Web.Data;
 using LeaveManagement.Web.Models;
+using LeaveManagement.Web.Data;
 
 namespace LeaveManagement.Web.Configuration
 {
@@ -8,7 +8,7 @@ namespace LeaveManagement.Web.Configuration
     {
         public MapperConfig()
         {
-            CreateMap<LeaveTypes, LeaveTypeVM>().ReverseMap();
+            CreateMap<LeaveType, LeaveTypeVM>().ReverseMap();
         }
     }
 }

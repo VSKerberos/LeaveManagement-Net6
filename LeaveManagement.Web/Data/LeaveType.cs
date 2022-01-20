@@ -1,6 +1,6 @@
 ﻿namespace LeaveManagement.Web.Data
 {
-    public class LeaveTypes : BaseEntity
+    public class LeaveType: BaseEntity
     {
 
         public string Name { get; set; }
