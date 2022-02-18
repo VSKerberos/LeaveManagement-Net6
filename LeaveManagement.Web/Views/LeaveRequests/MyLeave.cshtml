@@ -1,0 +1,103 @@
+﻿@model EmployeeLeaveRequestViewVM
+
+@{
+    ViewData["Title"] = "My Leave";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h4>Leave Allocations</h4>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col">Leave Name</div>
+                <div class="col">Original Allocation</div>
+                <div class="col">Current Allocation</div>
+            </div>
+        </li>
+
+        @foreach(var allocaiton in Model.LeaveAllocations)
+        {
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col"> <h6>@allocaiton.LeaveType.Name</h6> </div>
+                    <div class="col">
+                        <button type="button" class="btn-primary btn-primary">
+                            Allocated Days <span class="badge bg-secondary">@allocaiton.LeaveType.DefaultDays </span>
+                        </button>
+                    </div>
+                    <div class="col">
+                         <button type="button" class="btn-primary btn-primary">
+                            Remaining Days <span class="badge bg-secondary">@allocaiton.NumberOfDays</span>
+                        </button>
+                    </div>
+                    <div class="col">
+                        <a class="btn-primary btn-warning" asp-action="EditAllocation" asp-route-id="@allocaiton.Id">
+                            <i class="fas fa-pencil-alt"></i>
+                        </a>
+                    </div>
+                </div>
+            </li>
+        }
+
+    </ul>
+</div>
+
+<hr />
+<h2>Current Requests</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.LeaveRequests[0].StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LeaveRequests[0].EndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LeaveRequests[0].LeaveType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LeaveRequests[0].DateRequested)
+            </th>
+          
+            <th>
+                @Html.DisplayNameFor(model => model.LeaveRequests[0].Approved)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LeaveRequests[0].Cancelled)
+            </th>
+         
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.LeaveRequests) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LeaveType.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateRequested)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Approved)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cancelled)
+            </td>
+            <td>
+                <a asp-action="Cancel" class="btn-primary btn-danger" asp-route-id="@item.Id">Cancel Request</a> |
+                
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
