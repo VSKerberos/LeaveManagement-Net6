@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using LeaveManagement.Web.Constants;
 using LeaveManagement.Web.Contracts;
 using LeaveManagement.Web.Data;
@@ -35,8 +36,9 @@ namespace LeaveManagement.Web.Repositories
         public async Task<EmployeeAllocationVM> GetEmployeeAllocations(string emloyeeId)
         {
             var allocations = await dbContext.LeaveAllocationS
-                .Include(q => q.LeaveType)
-                .Where(q => q.EmployeeId == emloyeeId).ToListAsync();
+                .Include(q => q.LeaveType) // means inner join
+                .Where(q => q.EmployeeId == emloyeeId)
+                .ToListAsync();
 
             var emloyee = await userManager.FindByIdAsync(emloyeeId);
 
